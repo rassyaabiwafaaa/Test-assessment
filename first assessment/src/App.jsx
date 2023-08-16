@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "react-chat-elements/dist/main.css";
+import { MessageBox } from "react-chat-elements";
+
+import { IoMdSend } from "react-icons/io";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="h-[100vh] flex justify-center items-center">
+      <div className="bg-blue-200 h-[100vh] w-[60vh] flex flex-col justify-between">
+        <div className="flex flex-col gap-5 pt-3">
+          <MessageBox position={"left"} type={"text"} title={"John"} text="Hi !" />
+          <MessageBox position={"right"} type={"text"} title={"Doe"} text="Hi, How are you?" />
+        </div>
+
+        <div>
+          <form>
+            <div className="relative">
+              <input type="search" id="default-search" className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 focus:outline-none" placeholder="Type a Message" required />
+              <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-3 ">
+                <IoMdSend />
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
