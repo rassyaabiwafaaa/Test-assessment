@@ -1,6 +1,32 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function index() {
+  const navigate = useNavigate();
+
+  // state
+  const [input, setInput] = useState({
+    username: "",
+    password: "",
+  });
+
+  // Functions
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    axios
+      .post("http://13.212.226.116:8000/api/api/token/", input, config)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  };
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300">
       <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
@@ -9,7 +35,7 @@ export default function index() {
           <div className="absolute left-0 top-0 flex justify-center w-full -mt-2"></div>
         </div>
         <div className="mt-10">
-          <form action="#">
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col mb-6">
               <label htmlFor="username" className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
                 Username:
@@ -27,6 +53,7 @@ export default function index() {
                   name="username"
                   className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                   placeholder="Username"
+                  onChange={(e) => setInput((prevInput) => ({ ...prevInput, username: e.target.value }))}
                 />
               </div>
             </div>
@@ -49,8 +76,15 @@ export default function index() {
                   name="password"
                   className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                   placeholder="Password"
+                  onChange={(e) => setInput((prevInput) => ({ ...prevInput, password: e.target.value }))}
                 />
               </div>
+            </div>
+
+            <div className="mb-4">
+              <Link to={"/register"} className="text-blue-700">
+                or register here
+              </Link>
             </div>
 
             <div className="flex w-full">
