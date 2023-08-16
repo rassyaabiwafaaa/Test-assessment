@@ -1,11 +1,8 @@
-function App() {
-  const [count, setCount] = useState(0);
+import { Login } from "./Pages";
+import Router from "./routes/Router";
 
-  return (
-    <>
-      <h1>helloo</h1>
-    </>
-  );
+function App() {
+  return <Router />;
 }
 
 export default App;
